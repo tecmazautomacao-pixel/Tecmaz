@@ -102,6 +102,7 @@ function removerItemOS(btn){
   $('osqempty').style.display=document.querySelectorAll('#osqitems .osq-compact:not(.head)').length?'none':'block';
   recalcOS();
 }
+window.adicionarItemOS=adicionarItemOS; window.editarItemOS=editarItemOS; window.removerItemOS=removerItemOS;
 function coletarItensOS(){return currentOSItems();}
 
 function novaOS(clienteId=''){
