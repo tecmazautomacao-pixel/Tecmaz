@@ -5,129 +5,98 @@
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="theme-color" content="#0b2d42">
 <title>Tecmaz Automação</title>
-<style>
-*{box-sizing:border-box}body{margin:0;font-family:Arial,sans-serif;background:#f3f6f8;color:#163244}
-header{background:#0b2d42;color:white;padding:18px 16px;position:sticky;top:0;z-index:3}
-.brand{font-size:24px;font-weight:800;letter-spacing:.5px}.brand span{color:#ffc400}.sub{font-size:11px;opacity:.85;margin-top:3px}
-main{max-width:760px;margin:auto;padding:16px 14px 88px}.grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
-.card{background:white;border-radius:14px;padding:16px;box-shadow:0 2px 10px #0000000b;margin-bottom:12px}
-.stat{font-size:24px;font-weight:800;margin-top:5px}.muted{color:#71808a;font-size:13px}
-.btn{border:0;border-radius:11px;padding:13px 15px;font-weight:700;cursor:pointer;background:#0b2d42;color:white}
-.btn.yellow{background:#ffc400;color:#172b38}.btn.full{width:100%;font-size:16px;margin:8px 0}
-.row{display:flex;justify-content:space-between;gap:10px;align-items:center}.list{display:flex;flex-direction:column;gap:9px}
-.item{background:white;padding:13px;border-radius:12px;display:flex;justify-content:space-between;align-items:center;box-shadow:0 1px 6px #0000000a}
-.badge{padding:5px 8px;border-radius:20px;font-size:11px;font-weight:700;background:#e8eef2}.green{background:#d9f5df;color:#18702b}.orange{background:#fff0c8;color:#8a5b00}.red{background:#ffdede;color:#a42020}
-nav{position:fixed;bottom:0;left:0;right:0;background:#fff;border-top:1px solid #ddd;display:flex;justify-content:center;z-index:4}
-nav button{flex:1;max-width:150px;background:none;border:0;padding:10px 3px;font-size:11px;color:#5c6b74}nav button b{display:block;font-size:19px}
-input,select,textarea{width:100%;padding:12px;border:1px solid #d4dde2;border-radius:9px;margin:5px 0 11px;font:inherit}label{font-size:12px;font-weight:700}
-h2{margin:8px 0 14px;font-size:20px}h3{margin:5px 0 10px;font-size:15px}
-.hidden{display:none}.back{background:none;border:0;color:white;font-size:20px;margin-right:8px}
-.actions{display:flex;gap:8px;flex-wrap:wrap}.actions .btn{flex:1;min-width:130px}
-table{width:100%;border-collapse:collapse;font-size:13px}td{padding:9px 4px;border-bottom:1px solid #eee}
-</style>
 <link rel="manifest" href="manifest.webmanifest">
 <link rel="apple-touch-icon" href="icon-192.png">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<style>
+*{box-sizing:border-box}body{margin:0;font-family:Arial,sans-serif;background:#f3f6f8;color:#163244}
+header{background:#0b2d42;color:#fff;padding:18px 16px;position:sticky;top:0;z-index:5}.brand{font-size:24px;font-weight:800}.brand span{color:#ffc400}.sub{font-size:11px;opacity:.88;margin-top:4px}
+main{max-width:760px;margin:auto;padding:16px 14px 92px}.grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}.card{background:#fff;border-radius:14px;padding:16px;box-shadow:0 2px 10px #0000000b;margin-bottom:12px}.stat{font-size:24px;font-weight:800;margin-top:5px}.muted{color:#71808a;font-size:13px}
+.btn{border:0;border-radius:11px;padding:13px 15px;font-weight:700;cursor:pointer;background:#0b2d42;color:#fff}.btn.yellow{background:#ffc400;color:#172b38}.btn.full{width:100%;font-size:16px;margin:8px 0}.btn.light{background:#edf2f5;color:#163244}
+.row{display:flex;justify-content:space-between;gap:10px;align-items:center}.list{display:flex;flex-direction:column;gap:9px}.item{background:#fff;padding:13px;border-radius:12px;display:flex;justify-content:space-between;align-items:center;box-shadow:0 1px 6px #0000000a}
+.badge{padding:5px 8px;border-radius:20px;font-size:11px;font-weight:700;background:#e8eef2;white-space:nowrap}.green{background:#d9f5df;color:#18702b}.orange{background:#fff0c8;color:#8a5b00}.red{background:#ffdede;color:#a42020}.blue{background:#dcecff;color:#14549a}
+nav{position:fixed;bottom:0;left:0;right:0;background:#fff;border-top:1px solid #ddd;display:flex;justify-content:center;z-index:6}nav button{flex:1;max-width:150px;background:none;border:0;padding:10px 3px;font-size:11px;color:#5c6b74}nav button b{display:block;font-size:19px}
+input,select,textarea{width:100%;padding:12px;border:1px solid #d4dde2;border-radius:9px;margin:5px 0 11px;font:inherit;background:#fff}label{font-size:12px;font-weight:700}h2{margin:8px 0 14px;font-size:20px}h3{margin:5px 0 10px;font-size:15px}
+.actions{display:flex;gap:8px;flex-wrap:wrap}.actions .btn{flex:1;min-width:130px}.hidden{display:none}table{width:100%;border-collapse:collapse;font-size:13px}td{padding:9px 4px;border-bottom:1px solid #eee;vertical-align:top}
+.steps{display:grid;grid-template-columns:repeat(4,1fr);gap:5px;margin-bottom:12px}.step{font-size:10px;text-align:center;padding:8px 3px;border-radius:8px;background:#e8eef2;color:#64737d;font-weight:700}.step.active{background:#ffc400;color:#172b38}
+.section-title{font-weight:800;font-size:14px;margin:15px 0 8px}.photo-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:7px}.photo-grid img{width:100%;aspect-ratio:1;border-radius:8px;object-fit:cover}.danger{color:#a42020}.small{font-size:11px}
+
+.login-wrap{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:20px;background:#f3f6f8}.login-card{width:min(420px,100%);background:#fff;border-radius:18px;padding:24px;box-shadow:0 8px 30px #00000012}.login-card .brand{color:#0b2d42;margin-bottom:6px}.login-card .brand span{color:#d8a800}.login-card h2{margin-top:20px}.hidden{display:none!important}
+</style>
 </head>
 <body>
-<header><div class="brand">⚙ TECMAZ <span>AUTOMAÇÃO</span></div><div class="sub">MANUTENÇÃO EM INVERSORES, SOFT STARTERS E AUTOMAÇÃO INDUSTRIAL</div></header>
-<main id="app"></main>
-<nav>
-<button onclick="home()"><b>⌂</b>Início</button>
-<button onclick="clientes()"><b>♙</b>Clientes</button>
-<button onclick="ordens()"><b>⚒</b>OS</button>
-<button onclick="financeiro()"><b>▣</b>Financeiro</button>
-<button onclick="mais()"><b>•••</b>Mais</button>
+<div id="login" class="login-wrap hidden"></div>
+<header id="appHeader" class="hidden"><div class="brand">⚙ TECMAZ <span>AUTOMAÇÃO</span></div><div class="sub">MANUTENÇÃO EM INVERSORES, SOFT STARTERS E AUTOMAÇÃO INDUSTRIAL</div></header>
+<main id="app" class="hidden"></main>
+<nav id="nav" class="hidden">
+<button onclick="home()"><b>⌂</b>Início</button><button onclick="clientes()"><b>♙</b>Clientes</button><button onclick="ordens()"><b>⚒</b>OS</button><button onclick="financeiro()"><b>▣</b>Financeiro</button><button onclick="mais()"><b>•••</b>Mais</button>
 </nav>
-<script>
-const K='tecmaz_demo_v1';
-let db=JSON.parse(localStorage.getItem(K)||'{"clientes":[],"os":[],"receber":[]}');
-const app=document.getElementById('app');
-function save(){localStorage.setItem(K,JSON.stringify(db))}
-function money(v){return Number(v||0).toLocaleString('pt-BR',{style:'currency',currency:'BRL'})}
-function home(){
- let aberto=db.os.filter(x=>x.status!='Finalizada').length, of=db.os.filter(x=>x.local=='Oficina'&&x.status!='Finalizada').length;
- let total=db.os.reduce((s,x)=>s+Number(x.total||0),0);
- app.innerHTML=`<h2>Painel</h2><div class="card"><div class="muted">Olá!</div><h3>Vamos para mais um dia de trabalho.</h3></div>
- <div class="grid"><div class="card">🔧<div class="stat">${aberto}</div><div class="muted">OS abertas</div></div>
- <div class="card">📦<div class="stat">${of}</div><div class="muted">Na oficina</div></div>
- <div class="card">👥<div class="stat">${db.clientes.length}</div><div class="muted">Clientes</div></div>
- <div class="card">💵<div class="stat">${money(total)}</div><div class="muted">Serviços cadastrados</div></div></div>
- <button class="btn yellow full" onclick="novaOS()">＋ Nova Ordem de Serviço</button>
- <div class="card"><h3>Últimas OS</h3>${db.os.slice(-4).reverse().map(o=>`<div class="item" style="margin:7px 0"><div><b>OS ${o.id}</b><br><span class="muted">${o.cliente||'Sem cliente'} · ${o.equip||'Equipamento'}</span></div><span class="badge ${o.status=='Finalizada'?'green':'orange'}">${o.status}</span></div>`).join('')||'<div class="muted">Nenhuma OS cadastrada ainda.</div>'}</div>`;
+<script type="module">
+import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/+esm';
+const SUPABASE_URL='https://dpkykuriwzoqotbsdsob.supabase.co';
+const SUPABASE_KEY='sb_publishable_hI8aJKSdaqBkPuNXCgJCog_Fvu42H22';
+const supabase=createClient(SUPABASE_URL,SUPABASE_KEY);
+const app=document.getElementById('app'), login=document.getElementById('login');
+let session=null, db={clientes:[],equipamentos:[],os:[],orcamentos:[],financeiro:[]}, fotosTemp=[];
+const $=id=>document.getElementById(id);
+const esc=s=>String(s??'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]));
+const money=v=>Number(v||0).toLocaleString('pt-BR',{style:'currency',currency:'BRL'});
+const today=()=>new Date().toISOString().slice(0,10);
+const statusClass=s=>s==='Finalizada'?'green':(s==='Aguardando peça'||s==='Aguardando instalação'?'blue':'orange');
+const tipoCliente=c=>c?.tipo==='PF'?'Pessoa Física':'Pessoa Jurídica';
+function showApp(){login.classList.add('hidden');['appHeader','app','nav'].forEach(id=>$(id).classList.remove('hidden'));}
+function showLogin(){['appHeader','app','nav'].forEach(id=>$(id).classList.add('hidden'));login.classList.remove('hidden');login.innerHTML=`<div class="login-card"><div class="brand">⚙ TECMAZ <span>AUTOMAÇÃO</span></div><p class="muted">Sistema de gestão online</p><h2 id="authTitle">Entrar</h2><label>E-mail</label><input id="authEmail" type="email" autocomplete="email"><label>Senha</label><input id="authPass" type="password" autocomplete="current-password"><button class="btn yellow full" onclick="entrar()">Entrar</button><button class="btn light full" onclick="mostrarCadastro()">Criar acesso</button><div id="authMsg" class="small muted"></div></div>`;}
+window.mostrarCadastro=()=>{if(!$('authTitle'))return; $('authTitle').textContent='Criar acesso'; $('login').querySelector('.btn.yellow.full').textContent='Criar conta'; $('login').querySelector('.btn.yellow.full').onclick=cadastrar; $('login').querySelector('.btn.light.full').textContent='Voltar para entrar'; $('login').querySelector('.btn.light.full').onclick=showLogin;};
+window.entrar=async()=>{const email=$('authEmail').value.trim(),password=$('authPass').value;if(!email||!password)return $('authMsg').textContent='Informe e-mail e senha.'; const {error}=await supabase.auth.signInWithPassword({email,password}); if(error)$('authMsg').textContent=error.message;};
+window.cadastrar=async()=>{const email=$('authEmail').value.trim(),password=$('authPass').value;if(password.length<6)return $('authMsg').textContent='Use uma senha com pelo menos 6 caracteres.';const {data,error}=await supabase.auth.signUp({email,password});if(error)return $('authMsg').textContent=error.message;$('authMsg').textContent=data.session?'Conta criada. Entrando...':'Conta criada. Verifique seu e-mail para confirmar o acesso.';};
+window.sair=async()=>{await supabase.auth.signOut();};
+async function loadDB(){
+ const [c,e,o,q,f]=await Promise.all([
+  supabase.from('clientes').select('*').order('created_at',{ascending:false}),
+  supabase.from('equipamentos').select('*').order('created_at',{ascending:false}),
+  supabase.from('ordens_servico').select('*').order('numero',{ascending:false}),
+  supabase.from('orcamentos').select('*').order('created_at',{ascending:false}),
+  supabase.from('financeiro').select('*').order('created_at',{ascending:false})
+ ]);
+ for(const r of [c,e,o,q,f])if(r.error)throw r.error;
+ db={clientes:c.data||[],equipamentos:e.data||[],os:o.data||[],orcamentos:q.data||[],financeiro:f.data||[]};
 }
-function clientes(){
- app.innerHTML=`<div class="row"><h2>Clientes</h2><button class="btn yellow" onclick="novoCliente()">＋</button></div>
- <input placeholder="🔎 Pesquisar cliente..." oninput="filtraClientes(this.value)">
- <div id="clist" class="list"></div>`; filtraClientes('');
-}
-function filtraClientes(q){
- let a=db.clientes.filter(c=>(c.nome+' '+c.cnpj).toLowerCase().includes(q.toLowerCase()));
- document.getElementById('clist').innerHTML=a.map(c=>`<div class="item"><div><b>${c.nome}</b><br><span class="muted">${c.cnpj||'Sem CNPJ'} · ${c.tel||''}</span></div><button class="btn" onclick="novaOS('${encodeURIComponent(c.nome)}')">Nova OS</button></div>`).join('')||'<div class="card muted">Nenhum cliente cadastrado.</div>';
-}
-function novoCliente(){
- app.innerHTML=`<h2>Novo Cliente</h2><div class="card"><label>Nome / Razão social *</label><input id="cnome">
- <label>CPF / CNPJ</label><input id="ccnpj"><label>Telefone / WhatsApp</label><input id="ctel">
- <label>Endereço</label><input id="cend"><label>E-mail</label><input id="cemail">
- <button class="btn yellow full" onclick="salvarCliente()">Salvar cliente</button></div>`;
-}
-function salvarCliente(){
- let nome=document.getElementById('cnome').value.trim(); if(!nome)return alert('Informe o nome do cliente.');
- db.clientes.push({nome,cnpj:document.getElementById('ccnpj').value,tel:document.getElementById('ctel').value,end:document.getElementById('cend').value,email:document.getElementById('cemail').value});save();clientes();
-}
-function novaOS(pre=''){
- let nomes=db.clientes.map(c=>c.nome); let next=String((db.os.length?Math.max(...db.os.map(o=>+o.id)):0)+1).padStart(5,'0');
- app.innerHTML=`<h2>Nova Ordem de Serviço</h2><div class="card">
- <label>Cliente *</label><select id="ocliente"><option value="">Selecione...</option>${nomes.map(n=>`<option ${decodeURIComponent(pre)==n?'selected':''}>${n}</option>`).join('')}</select>
- <label>Data</label><input id="odata" type="date" value="${new Date().toISOString().slice(0,10)}">
- <label>Local do atendimento</label><select id="olocal"><option>Cliente</option><option>Oficina</option></select>
- <label>Tipo de serviço</label><select id="otipo"><option>Manutenção corretiva</option><option>Diagnóstico</option><option>Manutenção preventiva</option><option>Reparo em oficina</option><option>Instalação</option><option>Comissionamento</option></select>
- <label>Equipamento</label><input id="oequip" placeholder="Ex.: Inversor WEG CFW700">
- <label>Fabricante / Modelo</label><input id="omodelo" placeholder="Ex.: WEG / CFW700">
- <label>Nº de série</label><input id="oserie">
- <label>Defeito relatado</label><textarea id="odefeito" rows="3"></textarea>
- <label>Diagnóstico</label><textarea id="odiag" rows="3"></textarea>
- <label>Serviço realizado</label><textarea id="oserv" rows="3"></textarea>
- <label>Peças / materiais (R$)</label><input id="op" type="number" step=".01" value="0">
- <label>Mão de obra (R$)</label><input id="om" type="number" step=".01" value="0">
- <label>Deslocamento (R$)</label><input id="od" type="number" step=".01" value="0">
- <label>Outros (R$)</label><input id="out" type="number" step=".01" value="0">
- <button class="btn yellow full" onclick="salvarOS('${next}')">Salvar OS ${next}</button></div>`;
-}
-function salvarOS(id){
- let cliente=document.getElementById('ocliente').value; if(!cliente)return alert('Selecione um cliente.');
- let total=['op','om','od','out'].reduce((s,k)=>s+Number(document.getElementById(k).value||0),0);
- db.os.push({id,cliente,data:document.getElementById('odata').value,local:document.getElementById('olocal').value,tipo:document.getElementById('otipo').value,equip:document.getElementById('oequip').value,modelo:document.getElementById('omodelo').value,serie:document.getElementById('oserie').value,defeito:document.getElementById('odefeito').value,diag:document.getElementById('odiag').value,serv:document.getElementById('oserv').value,pecas:document.getElementById('op').value,mao:document.getElementById('om').value,desl:document.getElementById('od').value,out:document.getElementById('out').value,total,status:'Em execução'});save();verOS(id);
-}
-function verOS(id){
- let o=db.os.find(x=>x.id==id);
- app.innerHTML=`<div class="row"><h2>OS ${o.id}</h2><span class="badge orange">${o.status}</span></div>
- <div class="card"><h3>Dados</h3><table>
- <tr><td>Cliente</td><td><b>${o.cliente}</b></td></tr><tr><td>Data</td><td>${o.data}</td></tr><tr><td>Local</td><td>${o.local}</td></tr><tr><td>Tipo</td><td>${o.tipo}</td></tr>
- <tr><td>Equipamento</td><td>${o.equip||'-'}<br>${o.modelo||''}<br>S/N: ${o.serie||'-'}</td></tr>
- </table></div>
- <div class="card"><h3>Diagnóstico e serviço</h3><b>Defeito</b><p>${o.defeito||'-'}</p><b>Diagnóstico</b><p>${o.diag||'-'}</p><b>Serviço</b><p>${o.serv||'-'}</p></div>
- <div class="card"><h3>Valores</h3><table><tr><td>Peças</td><td>${money(o.pecas)}</td></tr><tr><td>Mão de obra</td><td>${money(o.mao)}</td></tr><tr><td>Deslocamento</td><td>${money(o.desl)}</td></tr><tr><td>Outros</td><td>${money(o.out)}</td></tr><tr><td><b>Total</b></td><td><b>${money(o.total)}</b></td></tr></table></div>
- <div class="actions"><button class="btn" onclick="finalizarOS('${o.id}')">✓ Finalizar OS</button><button class="btn yellow" onclick="orcamento('${o.id}')">Gerar orçamento</button><button class="btn" onclick="relatorio('${o.id}')">Relatório</button></div>`;
-}
-function finalizarOS(id){let o=db.os.find(x=>x.id==id);o.status='Finalizada';save();verOS(id)}
-function ordens(){
- app.innerHTML=`<div class="row"><h2>Ordens de Serviço</h2><button class="btn yellow" onclick="novaOS()">＋</button></div>
- <input placeholder="🔎 Pesquisar OS, cliente ou equipamento..." oninput="filtraOS(this.value)"><div id="olist" class="list"></div>`;filtraOS('');
-}
-function filtraOS(q){
- let a=db.os.filter(o=>(o.id+' '+o.cliente+' '+o.equip).toLowerCase().includes(q.toLowerCase()));
- document.getElementById('olist').innerHTML=a.slice().reverse().map(o=>`<div class="item" onclick="verOS('${o.id}')"><div><b>OS ${o.id}</b><br>${o.cliente}<br><span class="muted">${o.equip||'Equipamento'} · ${money(o.total)}</span></div><span class="badge ${o.status=='Finalizada'?'green':'orange'}">${o.status}</span></div>`).join('')||'<div class="card muted">Nenhuma OS.</div>';
-}
-function oficina(){let a=db.os.filter(o=>o.local=='Oficina'&&o.status!='Finalizada');app.innerHTML=`<h2>📦 Equipamentos na Oficina</h2><div class="list">${a.map(o=>`<div class="item" onclick="verOS('${o.id}')"><div><b>OS ${o.id}</b><br>${o.equip||'-'}<br><span class="muted">${o.cliente}</span></div><span class="badge orange">${o.status}</span></div>`).join('')||'<div class="card muted">Nenhum equipamento na oficina.</div>'}</div>`}
-function orcamento(id){let o=db.os.find(x=>x.id==id);alert(`ORÇAMENTO ${o.id}\n\nCliente: ${o.cliente}\nEquipamento: ${o.equip}\n\nTotal: ${money(o.total)}\n\nNa próxima versão, isso será um PDF pronto para enviar pelo WhatsApp.`)}
-function relatorio(id){let o=db.os.find(x=>x.id==id);alert(`RELATÓRIO TÉCNICO – OS ${o.id}\n\nCliente: ${o.cliente}\nEquipamento: ${o.equip}\n\nDefeito:\n${o.defeito||'-'}\n\nDiagnóstico:\n${o.diag||'-'}\n\nServiço executado:\n${o.serv||'-'}`)}
-function financeiro(){let total=db.os.reduce((s,o)=>s+Number(o.total||0),0);app.innerHTML=`<h2>💵 Financeiro</h2><div class="grid"><div class="card"><div class="stat">${money(total)}</div><div class="muted">Serviços cadastrados</div></div><div class="card"><div class="stat">${db.os.length}</div><div class="muted">OS</div></div></div><div class="card"><h3>Serviços</h3>${db.os.slice().reverse().map(o=>`<div class="item" style="margin:7px 0"><div>OS ${o.id}<br><span class="muted">${o.cliente}</span></div><b>${money(o.total)}</b></div>`).join('')||'<span class="muted">Sem lançamentos.</span>'}</div>`}
-function mais(){app.innerHTML=`<h2>Mais</h2><div class="list"><div class="item" onclick="oficina()">📦 Equipamentos na oficina ›</div><div class="item">🧾 Notas fiscais <span class="muted">integração na próxima etapa</span></div><div class="item">📊 Relatórios</div><div class="item">⚙ Configurações</div><div class="item">❓ Ajuda</div></div>`}
-home();
+async function refresh(fn){try{await loadDB();fn&&fn();}catch(e){alert('Erro ao carregar dados: '+e.message)}}
+function clienteById(id){return db.clientes.find(c=>c.id===id)}
+function clienteByNome(n){return db.clientes.find(c=>c.nome===n)}
+function home(){const aberto=db.os.filter(x=>x.status!=='Finalizada').length,of=db.os.filter(x=>x.local==='Oficina'&&x.status!=='Finalizada').length,total=db.os.reduce((s,x)=>s+Number(x.pecas||0)+Number(x.mao_de_obra||0)+Number(x.deslocamento||0)+Number(x.outros||0),0);app.innerHTML=`<h2>Painel</h2><div class="card"><div class="muted">Olá!</div><h3>Gestão online da Tecmaz.</h3><div class="small muted">Dados sincronizados com o banco online.</div></div><div class="grid"><div class="card">🔧<div class="stat">${aberto}</div><div class="muted">OS abertas</div></div><div class="card">📦<div class="stat">${of}</div><div class="muted">Na oficina</div></div><div class="card">👥<div class="stat">${db.clientes.length}</div><div class="muted">Clientes</div></div><div class="card">💵<div class="stat">${money(total)}</div><div class="muted">Serviços</div></div></div><button class="btn yellow full" onclick="novaOS()">＋ Nova Ordem de Serviço</button><div class="card"><h3>Últimas OS</h3>${db.os.slice(0,4).map(o=>`<div class="item" style="margin:7px 0" onclick="verOS('${o.id}')"><div><b>OS ${String(o.numero).padStart(5,'0')}</b><br><span class="muted">${esc(clienteById(o.cliente_id)?.nome||'-')} · ${esc(o.tipo_servico)||'Serviço'}</span></div><span class="badge ${statusClass(o.status)}">${esc(o.status)}</span></div>`).join('')||'<div class="muted">Nenhuma OS cadastrada.</div>'}</div>`}
+function clientes(){app.innerHTML=`<div class="row"><h2>Clientes</h2><button class="btn yellow" onclick="novoCliente()">＋</button></div><input placeholder="🔎 Pesquisar cliente..." oninput="filtraClientes(this.value)"><div id="clist" class="list"></div>`;filtraClientes('')}
+function filtraClientes(q){const s=(q||'').toLowerCase();const a=db.clientes.filter(c=>(c.nome+' '+(c.cpf_cnpj||'')+' '+(c.telefone||'')+' '+(c.cidade||'')).toLowerCase().includes(s));$('clist').innerHTML=a.map(c=>`<div class="item" onclick="verCliente('${c.id}')"><div><b>${esc(c.nome)}</b><br><span class="muted">${tipoCliente(c)} · ${esc(c.cpf_cnpj)||'Sem documento'} · ${esc(c.telefone)||'Sem telefone'}</span></div><button class="btn" onclick="event.stopPropagation();novaOS('${c.id}')">Nova OS</button></div>`).join('')||'<div class="card muted">Nenhum cliente cadastrado.</div>'}
+function novoCliente(){app.innerHTML=`<h2>Novo Cliente</h2><div class="card"><label>Tipo de cliente *</label><select id="ctipo"><option value="PF">Pessoa Física</option><option value="PJ">Pessoa Jurídica</option></select><label>Nome / Razão social *</label><input id="cnome"><label>CPF / CNPJ <span class="muted">(opcional)</span></label><input id="ccnpj"><label>Telefone / WhatsApp</label><input id="ctel"><label>Endereço</label><input id="cend"><div class="grid"><div><label>Cidade</label><input id="ccidade"></div><div><label>UF</label><input id="cuf" maxlength="2"></div></div><label>E-mail</label><input id="cemail"><label>Observações</label><textarea id="cobs" rows="3"></textarea><button class="btn yellow full" onclick="salvarCliente()">Salvar cliente</button><button class="btn light full" onclick="clientes()">Cancelar</button></div>`}
+window.salvarCliente=async()=>{const nome=$('cnome').value.trim();if(!nome)return alert('Informe o nome do cliente.');const {error}=await supabase.from('clientes').insert({tipo:$('ctipo').value,nome,cpf_cnpj:$('ccnpj').value.trim(),telefone:$('ctel').value.trim(),endereco:$('cend').value.trim(),cidade:$('ccidade').value.trim(),uf:$('cuf').value.trim().toUpperCase(),email:$('cemail').value.trim(),observacoes:$('cobs').value.trim()});if(error)return alert(error.message);await refresh(clientes)};
+window.verCliente=async id=>{await loadDB();const c=clienteById(id);if(!c)return clientes();const eq=db.equipamentos.filter(e=>e.cliente_id===id),os=db.os.filter(o=>o.cliente_id===id);app.innerHTML=`<div class="row"><h2>Cliente</h2><button class="btn yellow" onclick="novaOS('${id}')">＋ Nova OS</button></div><div class="card"><h3>${esc(c.nome)}</h3><div class="muted">${tipoCliente(c)}</div><table><tr><td>CPF/CNPJ</td><td>${esc(c.cpf_cnpj)||'Não informado'}</td></tr><tr><td>Telefone</td><td>${esc(c.telefone)||'-'}</td></tr><tr><td>Endereço</td><td>${esc(c.endereco)||'-'}${c.cidade?`<br>${esc(c.cidade)}${c.uf?' - '+esc(c.uf):''}`:''}</td></tr><tr><td>E-mail</td><td>${esc(c.email)||'-'}</td></tr><tr><td>Observações</td><td>${esc(c.observacoes)||'-'}</td></tr></table></div><div class="card"><div class="row"><h3>Equipamentos cadastrados</h3><button class="btn" onclick="novoEquipamento('${id}')">＋</button></div>${eq.map(e=>`<div class="item" style="margin:7px 0"><div><b>${esc(e.tipo)||'Equipamento'}</b><br>${esc(e.fabricante)} ${esc(e.modelo)}<br><span class="muted">S/N: ${esc(e.numero_serie)||'-'} · ${esc(e.potencia)||''} ${esc(e.tensao)||''}</span></div></div>`).join('')||'<div class="muted">Nenhum equipamento cadastrado.</div>'}</div><div class="card"><h3>Histórico de OS</h3>${os.map(o=>`<div class="item" style="margin:7px 0" onclick="verOS('${o.id}')"><div><b>OS ${String(o.numero).padStart(5,'0')}</b><br>${esc(o.tipo_servico)||'Serviço'}<br><span class="muted">${esc(o.data)}</span></div><span class="badge ${statusClass(o.status)}">${esc(o.status)}</span></div>`).join('')||'<div class="muted">Nenhuma OS ainda.</div>'}</div><div class="actions"><button class="btn" onclick="editarCliente('${id}')">✎ Editar cadastro</button><button class="btn" onclick="clientes()">Voltar</button></div>`}
+window.editarCliente=async id=>{await loadDB();const c=clienteById(id);if(!c)return clientes();app.innerHTML=`<h2>Editar Cliente</h2><div class="card"><label>Tipo de cliente *</label><select id="ctipo"><option value="PF" ${c.tipo==='PF'?'selected':''}>Pessoa Física</option><option value="PJ" ${c.tipo==='PJ'?'selected':''}>Pessoa Jurídica</option></select><label>Nome / Razão social *</label><input id="cnome" value="${esc(c.nome)}"><label>CPF / CNPJ <span class="muted">(opcional)</span></label><input id="ccnpj" value="${esc(c.cpf_cnpj||'')}"><label>Telefone / WhatsApp</label><input id="ctel" value="${esc(c.telefone||'')}"><label>Endereço</label><input id="cend" value="${esc(c.endereco||'')}"><div class="grid"><div><label>Cidade</label><input id="ccidade" value="${esc(c.cidade||'')}"></div><div><label>UF</label><input id="cuf" maxlength="2" value="${esc(c.uf||'')}"></div></div><label>E-mail</label><input id="cemail" value="${esc(c.email||'')}"><label>Observações</label><textarea id="cobs" rows="3">${esc(c.observacoes||'')}</textarea><button class="btn yellow full" onclick="atualizarCliente('${id}')">Salvar alterações</button><button class="btn light full" onclick="verCliente('${id}')">Cancelar</button></div>`}
+window.atualizarCliente=async id=>{const nome=$('cnome').value.trim();if(!nome)return alert('Informe o nome.');const {error}=await supabase.from('clientes').update({tipo:$('ctipo').value,nome,cpf_cnpj:$('ccnpj').value.trim(),telefone:$('ctel').value.trim(),endereco:$('cend').value.trim(),cidade:$('ccidade').value.trim(),uf:$('cuf').value.trim().toUpperCase(),email:$('cemail').value.trim(),observacoes:$('cobs').value.trim()}).eq('id',id);if(error)return alert(error.message);await refresh(()=>verCliente(id))};
+function novoEquipamento(clienteId){app.innerHTML=`<h2>Novo Equipamento</h2><div class="card"><div class="muted">Cliente: <b>${esc(clienteById(clienteId)?.nome)}</b></div><label>Tipo de equipamento *</label><input id="etipo"><label>Fabricante</label><input id="efab"><label>Modelo</label><input id="emodelo"><label>Nº de série</label><input id="eserie"><div class="grid"><div><label>Potência</label><input id="epot"></div><div><label>Tensão</label><input id="etens"></div></div><label>Local instalado</label><input id="elocal"><label>Observações</label><textarea id="eobs" rows="3"></textarea><button class="btn yellow full" onclick="salvarEquipamento('${clienteId}')">Salvar equipamento</button><button class="btn light full" onclick="verCliente('${clienteId}')">Cancelar</button></div>`}
+window.novoEquipamento=novoEquipamento;window.salvarEquipamento=async clienteId=>{const tipo=$('etipo').value.trim();if(!tipo)return alert('Informe o tipo.');const {error}=await supabase.from('equipamentos').insert({cliente_id:clienteId,tipo,fabricante:$('efab').value.trim(),modelo:$('emodelo').value.trim(),numero_serie:$('eserie').value.trim(),potencia:$('epot').value.trim(),tensao:$('etens').value.trim(),local_instalacao:$('elocal').value.trim(),observacoes:$('eobs').value.trim()});if(error)return alert(error.message);await refresh(()=>verCliente(clienteId))};
+function preencherEquip(id){const e=db.equipamentos.find(x=>x.id===id);if(!e)return;$('oequip').value=e.tipo||'';$('ofab').value=e.fabricante||'';$('omodelo').value=e.modelo||'';$('oserie').value=e.numero_serie||'';$('oespec').value=[e.potencia,e.tensao].filter(Boolean).join(' / ');$('oelocal').value=e.local_instalacao||'';}
+window.preencherEquip=preencherEquip;
+function novaOS(pre=''){const selected=pre||'',eqs=selected?db.equipamentos.filter(e=>e.cliente_id===selected):[];app.innerHTML=`<h2>Nova Ordem de Serviço</h2><div class="steps"><div class="step active">1 Cliente</div><div class="step active">2 Equipamento</div><div class="step active">3 Serviço</div><div class="step active">4 Resumo</div></div><div class="card"><div class="section-title">Dados do atendimento</div><label>Cliente *</label><select id="ocliente" onchange="atualizaEquipamentosOS()"><option value="">Selecione o cliente...</option>${db.clientes.map(c=>`<option value="${c.id}" ${selected===c.id?'selected':''}>${esc(c.nome)}</option>`).join('')}</select><label>Contato no local</label><input id="ocontato"><label>Data do atendimento *</label><input id="odata" type="date" value="${today()}"><label>Local do atendimento</label><select id="olocal"><option>Cliente</option><option>Oficina</option></select><label>Endereço / referência</label><input id="oend"><label>Tipo de serviço *</label><select id="otipo"><option>Manutenção corretiva</option><option>Diagnóstico</option><option>Manutenção preventiva</option><option>Reparo em oficina</option><option>Instalação</option><option>Comissionamento</option><option>Visita técnica</option></select><label>Defeito relatado pelo cliente</label><textarea id="odefeito" rows="3"></textarea><div class="section-title">Equipamento</div><label>Equipamento já cadastrado</label><select id="oeqid" onchange="preencherEquip(this.value)"><option value="">— Não selecionar / cadastrar depois —</option>${eqs.map(e=>`<option value="${e.id}">${esc(e.tipo)} · ${esc(e.fabricante)} ${esc(e.modelo)} · S/N ${esc(e.numero_serie)||'-'}</option>`).join('')}</select><label>Tipo de equipamento</label><input id="oequip"><div class="grid"><div><label>Fabricante</label><input id="ofab"></div><div><label>Modelo</label><input id="omodelo"></div></div><label>Nº de série</label><input id="oserie"><label>Potência / tensão</label><input id="oespec"><label>Local instalado</label><input id="oelocal"><label class="small"><input id="osaveeq" type="checkbox" style="width:auto;margin:0 5px 0 0">Salvar este equipamento no cadastro do cliente</label><div class="section-title">Diagnóstico e execução</div><label>Diagnóstico</label><textarea id="odiag" rows="3"></textarea><label>Serviço realizado</label><textarea id="oserv" rows="3"></textarea><label>Status</label><select id="ostatus"><option>Em execução</option><option>Aguardando peça</option><option>Aguardando instalação</option><option>Aguardando aprovação</option><option>Finalizada</option></select><div class="section-title">Valores</div><label>Peças / materiais (R$)</label><input id="op" type="number" step=".01" value="0"><label>Mão de obra (R$)</label><input id="om" type="number" step=".01" value="0"><label>Deslocamento (R$)</label><input id="od" type="number" step=".01" value="0"><label>Outros (R$)</label><input id="out" type="number" step=".01" value="0"><div class="section-title">Fotos</div><input id="ofotos" type="file" accept="image/*" multiple onchange="previewFotos(this)"><div id="photos" class="photo-grid"></div><div class="small muted">Nesta primeira versão online, os dados são sincronizados. As fotos serão ligadas ao armazenamento online na próxima etapa.</div><button class="btn yellow full" onclick="salvarOS()">Salvar OS</button><button class="btn light full" onclick="ordens()">Cancelar</button></div>`;if(selected){$('ocliente').dispatchEvent(new Event('change'))}}
+window.novaOS=novaOS;window.atualizaEquipamentosOS=()=>{const id=$('ocliente').value,eqs=db.equipamentos.filter(e=>e.cliente_id===id),sel=$('oeqid');sel.innerHTML='<option value="">— Não selecionar / cadastrar depois —</option>'+eqs.map(e=>`<option value="${e.id}">${esc(e.tipo)} · ${esc(e.fabricante)} ${esc(e.modelo)} · S/N ${esc(e.numero_serie)||'-'}</option>`).join('');const c=clienteById(id);if(c&&!$('oend').value)$('oend').value=c.endereco||''};
+window.previewFotos=input=>{fotosTemp=[];const box=$('photos');box.innerHTML='';[...input.files].slice(0,6).forEach(file=>{const r=new FileReader();r.onload=e=>{fotosTemp.push(e.target.result);box.innerHTML+=`<img src="${e.target.result}">`};r.readAsDataURL(file)})};
+window.salvarOS=async()=>{const cliente_id=$('ocliente').value;if(!cliente_id)return alert('Selecione um cliente.');let equipamento_id=$('oeqid').value||null;if($('osaveeq').checked){const parts=$('oespec').value.split('/');const {data,error}=await supabase.from('equipamentos').insert({cliente_id,tipo:$('oequip').value.trim()||'Equipamento',fabricante:$('ofab').value.trim(),modelo:$('omodelo').value.trim(),numero_serie:$('oserie').value.trim(),potencia:(parts[0]||'').trim(),tensao:(parts[1]||'').trim(),local_instalacao:$('oelocal').value.trim()}).select().single();if(error)return alert(error.message);equipamento_id=data.id;}const {error}=await supabase.from('ordens_servico').insert({cliente_id,equipamento_id,data:$('odata').value,local:$('olocal').value,endereco:$('oend').value,tipo_servico:$('otipo').value,defeito:$('odefeito').value,diagnostico:$('odiag').value,servico_realizado:$('oserv').value,status:$('ostatus').value,pecas:Number($('op').value||0),mao_de_obra:Number($('om').value||0),deslocamento:Number($('od').value||0),outros:Number($('out').value||0),observacoes:$('ocontato').value});if(error)return alert(error.message);fotosTemp=[];await refresh(ordens)};
+window.verOS=async id=>{await loadDB();const o=db.os.find(x=>x.id===id);if(!o)return ordens();const c=clienteById(o.cliente_id),e=db.equipamentos.find(x=>x.id===o.equipamento_id);app.innerHTML=`<div class="row"><h2>OS ${String(o.numero).padStart(5,'0')}</h2><span class="badge ${statusClass(o.status)}">${esc(o.status)}</span></div><div class="card"><h3>Dados do atendimento</h3><table><tr><td>Cliente</td><td><b>${esc(c?.nome||'-')}</b><br><span class="muted">${c?tipoCliente(c):''}${c?.cpf_cnpj?' · '+esc(c.cpf_cnpj):''}</span></td></tr><tr><td>Data</td><td>${esc(o.data)}</td></tr><tr><td>Local</td><td>${esc(o.local)}</td></tr><tr><td>Endereço</td><td>${esc(o.endereco)||'-'}</td></tr><tr><td>Contato</td><td>${esc(o.observacoes)||'-'}</td></tr><tr><td>Tipo</td><td>${esc(o.tipo_servico)}</td></tr><tr><td>Equipamento</td><td>${esc(e?.tipo||'-')}<br>${esc(e?.fabricante||'')} ${esc(e?.modelo||'')}<br>S/N: ${esc(e?.numero_serie||'-')}<br>${esc(e?.potencia||'')} ${esc(e?.tensao||'')}${e?.local_instalacao?'<br>Local: '+esc(e.local_instalacao):''}</td></tr></table></div><div class="card"><h3>Diagnóstico e serviço</h3><b>Defeito relatado</b><p>${esc(o.defeito)||'-'}</p><b>Diagnóstico</b><p>${esc(o.diagnostico)||'-'}</p><b>Serviço realizado</b><p>${esc(o.servico_realizado)||'-'}</p></div><div class="card"><h3>Valores</h3><table><tr><td>Peças</td><td>${money(o.pecas)}</td></tr><tr><td>Mão de obra</td><td>${money(o.mao_de_obra)}</td></tr><tr><td>Deslocamento</td><td>${money(o.deslocamento)}</td></tr><tr><td>Outros</td><td>${money(o.outros)}</td></tr><tr><td><b>Total</b></td><td><b>${money(Number(o.pecas)+Number(o.mao_de_obra)+Number(o.deslocamento)+Number(o.outros))}</b></td></tr></table></div><div class="actions"><button class="btn" onclick="editarOS('${id}')">✎ Editar</button><button class="btn" onclick="mudarStatus('${id}')">↻ Status</button><button class="btn yellow" onclick="orcamento('${id}')">🧾 Orçamento</button><button class="btn" onclick="relatorio('${id}')">📄 Relatório</button><button class="btn light" onclick="ordens()">Voltar</button></div>`};
+function ordens(){app.innerHTML=`<div class="row"><h2>Ordens de Serviço</h2><button class="btn yellow" onclick="novaOS()">＋</button></div><input placeholder="🔎 Pesquisar OS, cliente ou equipamento..." oninput="filtraOS(this.value)"><div id="olist" class="list"></div>`;filtraOS('')}
+function filtraOS(q){const s=(q||'').toLowerCase();const a=db.os.filter(o=>{const c=clienteById(o.cliente_id),e=db.equipamentos.find(x=>x.id===o.equipamento_id);return(String(o.numero)+' '+(c?.nome||'')+' '+(e?.tipo||'')+' '+(e?.modelo||'')+' '+(e?.numero_serie||'')).toLowerCase().includes(s)});$('olist').innerHTML=a.map(o=>{const c=clienteById(o.cliente_id),e=db.equipamentos.find(x=>x.id===o.equipamento_id);return`<div class="item" onclick="verOS('${o.id}')"><div><b>OS ${String(o.numero).padStart(5,'0')}</b><br>${esc(c?.nome||'-')}<br><span class="muted">${esc(e?.tipo)||'Equipamento'} · ${money(Number(o.pecas)+Number(o.mao_de_obra)+Number(o.deslocamento)+Number(o.outros))}</span></div><span class="badge ${statusClass(o.status)}">${esc(o.status)}</span></div>`}).join('')||'<div class="card muted">Nenhuma OS.</div>'}
+window.ordens=ordens;window.filtraOS=filtraOS;
+window.editarOS=async id=>alert('A edição completa da OS entra na próxima etapa. Por enquanto você já pode alterar o status e manter todo o histórico online.');
+window.mudarStatus=async id=>{const o=db.os.find(x=>x.id===id),s=prompt('Digite o novo status:\nEm execução\nAguardando peça\nAguardando instalação\nAguardando aprovação\nFinalizada',o?.status);if(!s)return;const {error}=await supabase.from('ordens_servico').update({status:s}).eq('id',id);if(error)return alert(error.message);await refresh(()=>verOS(id))};
+window.orcamento=id=>{const o=db.os.find(x=>x.id===id);alert(`ORÇAMENTO DA OS ${String(o.numero).padStart(5,'0')}\n\nEsta função será ligada ao módulo de orçamentos na próxima etapa.`)};
+window.relatorio=id=>{const o=db.os.find(x=>x.id===id);alert(`RELATÓRIO TÉCNICO – OS ${String(o.numero).padStart(5,'0')}\n\nDefeito:\n${o.defeito||'-'}\n\nDiagnóstico:\n${o.diagnostico||'-'}\n\nServiço executado:\n${o.servico_realizado||'-'}`)};
+function oficina(){const a=db.os.filter(o=>o.local==='Oficina'&&o.status!=='Finalizada');app.innerHTML=`<h2>📦 Equipamentos na Oficina</h2><div class="list">${a.map(o=>{const e=db.equipamentos.find(x=>x.id===o.equipamento_id),c=clienteById(o.cliente_id);return`<div class="item" onclick="verOS('${o.id}')"><div><b>OS ${String(o.numero).padStart(5,'0')}</b><br>${esc(e?.tipo||'-')} ${esc(e?.modelo||'')}<br><span class="muted">${esc(c?.nome||'-')}</span></div><span class="badge ${statusClass(o.status)}">${esc(o.status)}</span></div>`}).join('')||'<div class="card muted">Nenhum equipamento na oficina.</div>'}</div>`}
+window.oficina=oficina;
+function financeiro(){const total=db.os.reduce((s,o)=>s+Number(o.pecas)+Number(o.mao_de_obra)+Number(o.deslocamento)+Number(o.outros),0);app.innerHTML=`<h2>💵 Financeiro</h2><div class="grid"><div class="card"><div class="stat">${money(total)}</div><div class="muted">Serviços cadastrados</div></div><div class="card"><div class="stat">${db.os.length}</div><div class="muted">OS</div></div></div><div class="card"><h3>Serviços</h3>${db.os.map(o=>{const c=clienteById(o.cliente_id),v=Number(o.pecas)+Number(o.mao_de_obra)+Number(o.deslocamento)+Number(o.outros);return`<div class="item" style="margin:7px 0"><div>OS ${String(o.numero).padStart(5,'0')}<br><span class="muted">${esc(c?.nome||'-')}</span></div><b>${money(v)}</b></div>`}).join('')||'<span class="muted">Sem lançamentos.</span>'}</div>`}
+window.financeiro=financeiro;
+function mais(){app.innerHTML=`<h2>Mais</h2><div class="list"><div class="item" onclick="oficina()">📦 Equipamentos na oficina ›</div><div class="item">🧾 Notas fiscais <span class="muted">próxima etapa</span></div><div class="item">📊 Relatórios <span class="muted">próxima etapa</span></div><div class="item" onclick="sair()">🚪 Sair da conta</div></div>`}
+window.mais=mais;
+supabase.auth.onAuthStateChange(async (_event,s)=>{session=s;if(s){showApp();try{await loadDB();home()}catch(e){alert('Erro ao carregar o banco: '+e.message)}}else showLogin()});
+const {data:{session:s}}=await supabase.auth.getSession();session=s;if(session){showApp();try{await loadDB();home()}catch(e){alert('Erro ao carregar o banco: '+e.message)}}else showLogin();
 </script>
-<script>
-if ('serviceWorker' in navigator) navigator.serviceWorker.register('./sw.js');
-</script></body></html>
+<script>if('serviceWorker' in navigator) navigator.serviceWorker.register('./sw.js');</script>
+</body></html>
