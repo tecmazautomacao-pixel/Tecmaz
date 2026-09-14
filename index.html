@@ -1,0 +1,133 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#0b2d42">
+<title>Tecmaz Automação</title>
+<style>
+*{box-sizing:border-box}body{margin:0;font-family:Arial,sans-serif;background:#f3f6f8;color:#163244}
+header{background:#0b2d42;color:white;padding:18px 16px;position:sticky;top:0;z-index:3}
+.brand{font-size:24px;font-weight:800;letter-spacing:.5px}.brand span{color:#ffc400}.sub{font-size:11px;opacity:.85;margin-top:3px}
+main{max-width:760px;margin:auto;padding:16px 14px 88px}.grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.card{background:white;border-radius:14px;padding:16px;box-shadow:0 2px 10px #0000000b;margin-bottom:12px}
+.stat{font-size:24px;font-weight:800;margin-top:5px}.muted{color:#71808a;font-size:13px}
+.btn{border:0;border-radius:11px;padding:13px 15px;font-weight:700;cursor:pointer;background:#0b2d42;color:white}
+.btn.yellow{background:#ffc400;color:#172b38}.btn.full{width:100%;font-size:16px;margin:8px 0}
+.row{display:flex;justify-content:space-between;gap:10px;align-items:center}.list{display:flex;flex-direction:column;gap:9px}
+.item{background:white;padding:13px;border-radius:12px;display:flex;justify-content:space-between;align-items:center;box-shadow:0 1px 6px #0000000a}
+.badge{padding:5px 8px;border-radius:20px;font-size:11px;font-weight:700;background:#e8eef2}.green{background:#d9f5df;color:#18702b}.orange{background:#fff0c8;color:#8a5b00}.red{background:#ffdede;color:#a42020}
+nav{position:fixed;bottom:0;left:0;right:0;background:#fff;border-top:1px solid #ddd;display:flex;justify-content:center;z-index:4}
+nav button{flex:1;max-width:150px;background:none;border:0;padding:10px 3px;font-size:11px;color:#5c6b74}nav button b{display:block;font-size:19px}
+input,select,textarea{width:100%;padding:12px;border:1px solid #d4dde2;border-radius:9px;margin:5px 0 11px;font:inherit}label{font-size:12px;font-weight:700}
+h2{margin:8px 0 14px;font-size:20px}h3{margin:5px 0 10px;font-size:15px}
+.hidden{display:none}.back{background:none;border:0;color:white;font-size:20px;margin-right:8px}
+.actions{display:flex;gap:8px;flex-wrap:wrap}.actions .btn{flex:1;min-width:130px}
+table{width:100%;border-collapse:collapse;font-size:13px}td{padding:9px 4px;border-bottom:1px solid #eee}
+</style>
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="apple-touch-icon" href="icon-192.png">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+</head>
+<body>
+<header><div class="brand">⚙ TECMAZ <span>AUTOMAÇÃO</span></div><div class="sub">MANUTENÇÃO EM INVERSORES, SOFT STARTERS E AUTOMAÇÃO INDUSTRIAL</div></header>
+<main id="app"></main>
+<nav>
+<button onclick="home()"><b>⌂</b>Início</button>
+<button onclick="clientes()"><b>♙</b>Clientes</button>
+<button onclick="ordens()"><b>⚒</b>OS</button>
+<button onclick="financeiro()"><b>▣</b>Financeiro</button>
+<button onclick="mais()"><b>•••</b>Mais</button>
+</nav>
+<script>
+const K='tecmaz_demo_v1';
+let db=JSON.parse(localStorage.getItem(K)||'{"clientes":[],"os":[],"receber":[]}');
+const app=document.getElementById('app');
+function save(){localStorage.setItem(K,JSON.stringify(db))}
+function money(v){return Number(v||0).toLocaleString('pt-BR',{style:'currency',currency:'BRL'})}
+function home(){
+ let aberto=db.os.filter(x=>x.status!='Finalizada').length, of=db.os.filter(x=>x.local=='Oficina'&&x.status!='Finalizada').length;
+ let total=db.os.reduce((s,x)=>s+Number(x.total||0),0);
+ app.innerHTML=`<h2>Painel</h2><div class="card"><div class="muted">Olá!</div><h3>Vamos para mais um dia de trabalho.</h3></div>
+ <div class="grid"><div class="card">🔧<div class="stat">${aberto}</div><div class="muted">OS abertas</div></div>
+ <div class="card">📦<div class="stat">${of}</div><div class="muted">Na oficina</div></div>
+ <div class="card">👥<div class="stat">${db.clientes.length}</div><div class="muted">Clientes</div></div>
+ <div class="card">💵<div class="stat">${money(total)}</div><div class="muted">Serviços cadastrados</div></div></div>
+ <button class="btn yellow full" onclick="novaOS()">＋ Nova Ordem de Serviço</button>
+ <div class="card"><h3>Últimas OS</h3>${db.os.slice(-4).reverse().map(o=>`<div class="item" style="margin:7px 0"><div><b>OS ${o.id}</b><br><span class="muted">${o.cliente||'Sem cliente'} · ${o.equip||'Equipamento'}</span></div><span class="badge ${o.status=='Finalizada'?'green':'orange'}">${o.status}</span></div>`).join('')||'<div class="muted">Nenhuma OS cadastrada ainda.</div>'}</div>`;
+}
+function clientes(){
+ app.innerHTML=`<div class="row"><h2>Clientes</h2><button class="btn yellow" onclick="novoCliente()">＋</button></div>
+ <input placeholder="🔎 Pesquisar cliente..." oninput="filtraClientes(this.value)">
+ <div id="clist" class="list"></div>`; filtraClientes('');
+}
+function filtraClientes(q){
+ let a=db.clientes.filter(c=>(c.nome+' '+c.cnpj).toLowerCase().includes(q.toLowerCase()));
+ document.getElementById('clist').innerHTML=a.map(c=>`<div class="item"><div><b>${c.nome}</b><br><span class="muted">${c.cnpj||'Sem CNPJ'} · ${c.tel||''}</span></div><button class="btn" onclick="novaOS('${encodeURIComponent(c.nome)}')">Nova OS</button></div>`).join('')||'<div class="card muted">Nenhum cliente cadastrado.</div>';
+}
+function novoCliente(){
+ app.innerHTML=`<h2>Novo Cliente</h2><div class="card"><label>Nome / Razão social *</label><input id="cnome">
+ <label>CPF / CNPJ</label><input id="ccnpj"><label>Telefone / WhatsApp</label><input id="ctel">
+ <label>Endereço</label><input id="cend"><label>E-mail</label><input id="cemail">
+ <button class="btn yellow full" onclick="salvarCliente()">Salvar cliente</button></div>`;
+}
+function salvarCliente(){
+ let nome=document.getElementById('cnome').value.trim(); if(!nome)return alert('Informe o nome do cliente.');
+ db.clientes.push({nome,cnpj:document.getElementById('ccnpj').value,tel:document.getElementById('ctel').value,end:document.getElementById('cend').value,email:document.getElementById('cemail').value});save();clientes();
+}
+function novaOS(pre=''){
+ let nomes=db.clientes.map(c=>c.nome); let next=String((db.os.length?Math.max(...db.os.map(o=>+o.id)):0)+1).padStart(5,'0');
+ app.innerHTML=`<h2>Nova Ordem de Serviço</h2><div class="card">
+ <label>Cliente *</label><select id="ocliente"><option value="">Selecione...</option>${nomes.map(n=>`<option ${decodeURIComponent(pre)==n?'selected':''}>${n}</option>`).join('')}</select>
+ <label>Data</label><input id="odata" type="date" value="${new Date().toISOString().slice(0,10)}">
+ <label>Local do atendimento</label><select id="olocal"><option>Cliente</option><option>Oficina</option></select>
+ <label>Tipo de serviço</label><select id="otipo"><option>Manutenção corretiva</option><option>Diagnóstico</option><option>Manutenção preventiva</option><option>Reparo em oficina</option><option>Instalação</option><option>Comissionamento</option></select>
+ <label>Equipamento</label><input id="oequip" placeholder="Ex.: Inversor WEG CFW700">
+ <label>Fabricante / Modelo</label><input id="omodelo" placeholder="Ex.: WEG / CFW700">
+ <label>Nº de série</label><input id="oserie">
+ <label>Defeito relatado</label><textarea id="odefeito" rows="3"></textarea>
+ <label>Diagnóstico</label><textarea id="odiag" rows="3"></textarea>
+ <label>Serviço realizado</label><textarea id="oserv" rows="3"></textarea>
+ <label>Peças / materiais (R$)</label><input id="op" type="number" step=".01" value="0">
+ <label>Mão de obra (R$)</label><input id="om" type="number" step=".01" value="0">
+ <label>Deslocamento (R$)</label><input id="od" type="number" step=".01" value="0">
+ <label>Outros (R$)</label><input id="out" type="number" step=".01" value="0">
+ <button class="btn yellow full" onclick="salvarOS('${next}')">Salvar OS ${next}</button></div>`;
+}
+function salvarOS(id){
+ let cliente=document.getElementById('ocliente').value; if(!cliente)return alert('Selecione um cliente.');
+ let total=['op','om','od','out'].reduce((s,k)=>s+Number(document.getElementById(k).value||0),0);
+ db.os.push({id,cliente,data:document.getElementById('odata').value,local:document.getElementById('olocal').value,tipo:document.getElementById('otipo').value,equip:document.getElementById('oequip').value,modelo:document.getElementById('omodelo').value,serie:document.getElementById('oserie').value,defeito:document.getElementById('odefeito').value,diag:document.getElementById('odiag').value,serv:document.getElementById('oserv').value,pecas:document.getElementById('op').value,mao:document.getElementById('om').value,desl:document.getElementById('od').value,out:document.getElementById('out').value,total,status:'Em execução'});save();verOS(id);
+}
+function verOS(id){
+ let o=db.os.find(x=>x.id==id);
+ app.innerHTML=`<div class="row"><h2>OS ${o.id}</h2><span class="badge orange">${o.status}</span></div>
+ <div class="card"><h3>Dados</h3><table>
+ <tr><td>Cliente</td><td><b>${o.cliente}</b></td></tr><tr><td>Data</td><td>${o.data}</td></tr><tr><td>Local</td><td>${o.local}</td></tr><tr><td>Tipo</td><td>${o.tipo}</td></tr>
+ <tr><td>Equipamento</td><td>${o.equip||'-'}<br>${o.modelo||''}<br>S/N: ${o.serie||'-'}</td></tr>
+ </table></div>
+ <div class="card"><h3>Diagnóstico e serviço</h3><b>Defeito</b><p>${o.defeito||'-'}</p><b>Diagnóstico</b><p>${o.diag||'-'}</p><b>Serviço</b><p>${o.serv||'-'}</p></div>
+ <div class="card"><h3>Valores</h3><table><tr><td>Peças</td><td>${money(o.pecas)}</td></tr><tr><td>Mão de obra</td><td>${money(o.mao)}</td></tr><tr><td>Deslocamento</td><td>${money(o.desl)}</td></tr><tr><td>Outros</td><td>${money(o.out)}</td></tr><tr><td><b>Total</b></td><td><b>${money(o.total)}</b></td></tr></table></div>
+ <div class="actions"><button class="btn" onclick="finalizarOS('${o.id}')">✓ Finalizar OS</button><button class="btn yellow" onclick="orcamento('${o.id}')">Gerar orçamento</button><button class="btn" onclick="relatorio('${o.id}')">Relatório</button></div>`;
+}
+function finalizarOS(id){let o=db.os.find(x=>x.id==id);o.status='Finalizada';save();verOS(id)}
+function ordens(){
+ app.innerHTML=`<div class="row"><h2>Ordens de Serviço</h2><button class="btn yellow" onclick="novaOS()">＋</button></div>
+ <input placeholder="🔎 Pesquisar OS, cliente ou equipamento..." oninput="filtraOS(this.value)"><div id="olist" class="list"></div>`;filtraOS('');
+}
+function filtraOS(q){
+ let a=db.os.filter(o=>(o.id+' '+o.cliente+' '+o.equip).toLowerCase().includes(q.toLowerCase()));
+ document.getElementById('olist').innerHTML=a.slice().reverse().map(o=>`<div class="item" onclick="verOS('${o.id}')"><div><b>OS ${o.id}</b><br>${o.cliente}<br><span class="muted">${o.equip||'Equipamento'} · ${money(o.total)}</span></div><span class="badge ${o.status=='Finalizada'?'green':'orange'}">${o.status}</span></div>`).join('')||'<div class="card muted">Nenhuma OS.</div>';
+}
+function oficina(){let a=db.os.filter(o=>o.local=='Oficina'&&o.status!='Finalizada');app.innerHTML=`<h2>📦 Equipamentos na Oficina</h2><div class="list">${a.map(o=>`<div class="item" onclick="verOS('${o.id}')"><div><b>OS ${o.id}</b><br>${o.equip||'-'}<br><span class="muted">${o.cliente}</span></div><span class="badge orange">${o.status}</span></div>`).join('')||'<div class="card muted">Nenhum equipamento na oficina.</div>'}</div>`}
+function orcamento(id){let o=db.os.find(x=>x.id==id);alert(`ORÇAMENTO ${o.id}\n\nCliente: ${o.cliente}\nEquipamento: ${o.equip}\n\nTotal: ${money(o.total)}\n\nNa próxima versão, isso será um PDF pronto para enviar pelo WhatsApp.`)}
+function relatorio(id){let o=db.os.find(x=>x.id==id);alert(`RELATÓRIO TÉCNICO – OS ${o.id}\n\nCliente: ${o.cliente}\nEquipamento: ${o.equip}\n\nDefeito:\n${o.defeito||'-'}\n\nDiagnóstico:\n${o.diag||'-'}\n\nServiço executado:\n${o.serv||'-'}`)}
+function financeiro(){let total=db.os.reduce((s,o)=>s+Number(o.total||0),0);app.innerHTML=`<h2>💵 Financeiro</h2><div class="grid"><div class="card"><div class="stat">${money(total)}</div><div class="muted">Serviços cadastrados</div></div><div class="card"><div class="stat">${db.os.length}</div><div class="muted">OS</div></div></div><div class="card"><h3>Serviços</h3>${db.os.slice().reverse().map(o=>`<div class="item" style="margin:7px 0"><div>OS ${o.id}<br><span class="muted">${o.cliente}</span></div><b>${money(o.total)}</b></div>`).join('')||'<span class="muted">Sem lançamentos.</span>'}</div>`}
+function mais(){app.innerHTML=`<h2>Mais</h2><div class="list"><div class="item" onclick="oficina()">📦 Equipamentos na oficina ›</div><div class="item">🧾 Notas fiscais <span class="muted">integração na próxima etapa</span></div><div class="item">📊 Relatórios</div><div class="item">⚙ Configurações</div><div class="item">❓ Ajuda</div></div>`}
+home();
+</script>
+<script>
+if ('serviceWorker' in navigator) navigator.serviceWorker.register('./sw.js');
+</script></body></html>
