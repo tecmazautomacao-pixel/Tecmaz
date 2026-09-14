@@ -3,9 +3,9 @@ const CACHE = "tecmaz-v2";
 const ASSETS = [
   "./",
   "./index.html",
-  "./manifesto.webmanifest",
-  "./ícone-192.png",
-  "./ícone-512.png"
+  "./manifest.webmanifest",
+  "./icon-192.png",
+  "./icon-512.png"
 ];
 
 self.addEventListener("install", event => {
