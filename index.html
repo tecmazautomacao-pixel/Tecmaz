@@ -48,6 +48,62 @@ function itemRow(i={},n=1){
     <div class="osq-actions"><button type="button" class="osq-remove" onclick="removerItemOS(this)">Remover</button></div>
   </div>`;
 }
+let osDraftEditIndex=-1;
+function currentOSItems(){
+  return Array.from(document.querySelectorAll('#osqitems .osq-compact')).map(r=>({
+    descricao:r.dataset.desc||'', valor:Number(r.dataset.val||0), qtd:Number(r.dataset.qty||1)
+  }));
+}
+function renderOSItems(){
+  const box=$('osqitems'); if(!box)return;
+  const items=currentOSItems();
+  box.innerHTML=(items.length?`<div class="osq-compact head"><div>Item</div><div>Descrição</div><div>Valor unitário</div><div>Quantidade</div><div>Ações</div><div></div></div>`:'')+items.map((x,i)=>itemRow(x,i+1)).join('');
+  $('osqempty').style.display=items.length?'none':'block';
+  recalcOS();
+}
+function recalcOS(){
+  const total=currentOSItems().reduce((s,x)=>s+Number(x.valor||0)*Number(x.qtd||0),0);
+  const t=$('ostotal'); if(t)t.textContent='Total: '+money(total);
+}
+function adicionarItemOS(){
+  const d=$('draftDesc')?.value.trim();
+  const v=Number($('draftVal')?.value||0);
+  const q=Number($('draftQty')?.value||1);
+  if(!d)return alert('Informe a descrição do item.');
+  if(q<=0)return alert('A quantidade deve ser maior que zero.');
+  const box=$('osqitems'); if(!box)return;
+  const items=currentOSItems();
+  if(osDraftEditIndex>=0){
+    items[osDraftEditIndex]={descricao:d,valor:v,qtd:q};
+    osDraftEditIndex=-1;
+  }else items.push({descricao:d,valor:v,qtd:q});
+  box.innerHTML='';
+  items.forEach((x,i)=>box.insertAdjacentHTML('beforeend',itemRow(x,i+1)));
+  $('draftDesc').value=''; $('draftVal').value='0'; $('draftQty').value='1';
+  const b=$('draftBtn'); if(b)b.textContent='＋ Mais itens';
+  $('osqempty').style.display=items.length?'none':'block';
+  recalcOS();
+}
+function editarItemOS(btn){
+  const row=btn.closest('.osq-compact'); if(!row)return;
+  const rows=Array.from(document.querySelectorAll('#osqitems .osq-compact:not(.head)'));
+  osDraftEditIndex=rows.indexOf(row);
+  $('draftDesc').value=row.dataset.desc||'';
+  $('draftVal').value=row.dataset.val||0;
+  $('draftQty').value=row.dataset.qty||1;
+  const b=$('draftBtn'); if(b)b.textContent='✓ Atualizar item';
+  $('draftDesc').focus();
+}
+function removerItemOS(btn){
+  const row=btn.closest('.osq-compact'); if(!row)return;
+  row.remove();
+  osDraftEditIndex=-1;
+  const b=$('draftBtn'); if(b)b.textContent='＋ Mais itens';
+  $('osqempty').style.display=document.querySelectorAll('#osqitems .osq-compact:not(.head)').length?'none':'block';
+  recalcOS();
+}
+function coletarItensOS(){return currentOSItems();}
+
 function novaOS(clienteId=''){
   const eqs=clienteId?db.equipamentos.filter(e=>e.cliente_id===clienteId):[];
   app.innerHTML=`<div class="row"><h2>Nova Ordem de Serviço</h2><button class="btn light" onclick="ordens()">Voltar</button></div>
