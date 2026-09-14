@@ -95,6 +95,13 @@ function financeiro(){const total=db.os.reduce((s,o)=>s+Number(o.pecas)+Number(o
 window.financeiro=financeiro;
 function mais(){app.innerHTML=`<h2>Mais</h2><div class="list"><div class="item" onclick="oficina()">📦 Equipamentos na oficina ›</div><div class="item">🧾 Notas fiscais <span class="muted">próxima etapa</span></div><div class="item">📊 Relatórios <span class="muted">próxima etapa</span></div><div class="item" onclick="sair()">🚪 Sair da conta</div></div>`}
 window.mais=mais;
+
+// Compatibilidade com botões inline do HTML: funções do módulo precisam estar no window.
+window.home=home;
+window.clientes=clientes;
+window.novoCliente=novoCliente;
+window.filtraClientes=filtraClientes;
+window.novoEquipamento=novoEquipamento;
 supabase.auth.onAuthStateChange(async (_event,s)=>{session=s;if(s){showApp();try{await loadDB();home()}catch(e){alert('Erro ao carregar o banco: '+e.message)}}else showLogin()});
 const {data:{session:s}}=await supabase.auth.getSession();session=s;if(session){showApp();try{await loadDB();home()}catch(e){alert('Erro ao carregar o banco: '+e.message)}}else showLogin();
 </script>
