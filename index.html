@@ -15,7 +15,26 @@
 .client-pick-row{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:8px;align-items:start}.selected-info{background:#f4f7f9;border:1px solid #dbe2e6;border-radius:10px;padding:10px;margin-top:2px;margin-bottom:4px;line-height:1.5}.client-pick-row select{margin-bottom:5px}@media(max-width:600px){.client-pick-row{grid-template-columns:1fr}.client-pick-row .btn{width:100%}}
 
 .tz16-home{display:grid;gap:12px}.tz16-hero{background:#0b2d42;color:#fff;border-radius:16px;padding:17px}.tz16-hero b{font-size:21px}.tz16-hero small{display:block;opacity:.82;margin-top:4px}.tz16-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}.tz16-card{background:#fff;border-radius:13px;padding:13px;box-shadow:0 2px 8px #00000009}.tz16-card .n{font-size:23px;font-weight:800;margin-top:4px}.tz16-actions{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}.tz16-action{background:#fff;border:1px solid #dbe2e6;border-radius:11px;padding:11px 5px;text-align:center;font-weight:700;font-size:12px}.tz16-alert{background:#fff8d9;border:1px solid #eed56a;border-radius:12px;padding:12px}.tz16-status{display:flex;justify-content:space-between;gap:8px;padding:8px 0;border-bottom:1px solid #edf0f2}.tz16-status:last-child{border-bottom:0}@media(min-width:700px){.tz16-grid{grid-template-columns:repeat(4,1fr)}}
-</style></head><body><div id="login" class="login-wrap"></div><header id="header" class="hidden"><div class="brand">⚙ TECMAZ <span>AUTOMAÇÃO</span></div><div class="sub">MANUTENÇÃO EM INVERSORES, SOFT STARTERS E AUTOMAÇÃO INDUSTRIAL</div></header><main id="app" class="hidden"></main><nav id="nav" class="hidden"><button onclick="goScreen('home')"><b>⌂</b>Início</button><button onclick="goScreen('clientes')"><b>♙</b>Clientes</button><button onclick="goScreen('ordens')"><b>⚒</b>OS</button><button onclick="goScreen('financeiro')"><b>▣</b>Caixa</button><button onclick="goScreen('mais')"><b>☰</b>Mais</button></nav>
+</style>
+<style id="tecmaz-v23-pdf">
+@media print{
+  body{background:#fff!important}
+  .no-print,nav,.nav,.bottom-nav,.topbar button{display:none!important}
+  .pdf-sheet{font-family:Arial,sans-serif;color:#172033;max-width:800px;margin:auto}
+  .pdf-head{border-bottom:3px solid #172033;padding-bottom:12px;margin-bottom:14px}
+  .pdf-head h1{margin:0;font-size:22px}
+  .pdf-head small{color:#667085}
+  .pdf-block{border:1px solid #d9dee8;border-radius:8px;padding:10px;margin:8px 0}
+  .pdf-title{font-weight:700;font-size:11px;text-transform:uppercase;letter-spacing:.4px;margin-bottom:5px}
+  .pdf-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+  .pdf-table{width:100%;border-collapse:collapse;margin-top:8px}
+  .pdf-table th{background:#172033;color:#fff;text-align:left;padding:7px;font-size:11px}
+  .pdf-table td{border-bottom:1px solid #e4e7ec;padding:7px;font-size:11px}
+  .pdf-total{text-align:right;font-size:17px;font-weight:800;padding:10px 0}
+  .pdf-foot{font-size:10px;color:#667085;border-top:1px solid #d9dee8;padding-top:9px;margin-top:12px}
+}
+</style>
+</head><body><div id="login" class="login-wrap"></div><header id="header" class="hidden"><div class="brand">⚙ TECMAZ <span>AUTOMAÇÃO</span></div><div class="sub">MANUTENÇÃO EM INVERSORES, SOFT STARTERS E AUTOMAÇÃO INDUSTRIAL</div></header><main id="app" class="hidden"></main><nav id="nav" class="hidden"><button onclick="goScreen('home')"><b>⌂</b>Início</button><button onclick="goScreen('clientes')"><b>♙</b>Clientes</button><button onclick="goScreen('ordens')"><b>⚒</b>OS</button><button onclick="goScreen('financeiro')"><b>▣</b>Caixa</button><button onclick="goScreen('mais')"><b>☰</b>Mais</button></nav>
 <script type="module">
 import {createClient} from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/+esm';
 const supabase=createClient('https://dpkykuriwzoqotbsdsob.supabase.co','sb_publishable_hI8aJKSdaqBkPuNXCgJCog_Fvu42H22');
