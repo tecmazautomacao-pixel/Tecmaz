@@ -1,0 +1,10 @@
+{
+  "name": "Tecmaz Automação",
+  "short_name": "Tecmaz",
+  "start_url": "./",
+  "display": "standalone",
+  "background_color": "#f4f6f9",
+  "theme_color": "#071b3a",
+  "lang": "pt-BR",
+  "icons": []
+}
